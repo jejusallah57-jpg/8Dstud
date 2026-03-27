@@ -1,8 +1,5 @@
 name: Build APK
-
 on:
-  push:
-    branches: [ "main" ]
   workflow_dispatch:
 
 jobs:
@@ -10,15 +7,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - name: Build with Buildozer
-        uses: ArtemSerebriakov/buildozer-action@v1
+      - name: Build
+        uses: kivy/buildozer-action@master
         with:
           command: buildozer android debug
-          buildozer_version: stable
-
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
+      - uses: actions/upload-artifact@v4
         with:
           name: 8DStud-App
           path: bin/*.apk
